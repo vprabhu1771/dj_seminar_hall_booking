@@ -65,3 +65,28 @@ class Venue(models.Model):
 
     class Meta:
         db_table = 'venue'
+
+
+
+class Booking(models.Model):
+    id = models.BigAutoField(primary_key=True)
+
+    event_type = models.CharField(max_length=255)
+
+    venue = models.ForeignKey(Venue, on_delete=models.SET_NULL, null=True)
+
+    capacity = models.PositiveIntegerField(default=0, blank=True, null=True)
+
+    event_date = models.DateField(blank=True, null=True)
+
+    event_starting_time = models.TimeField(blank=True, null=True)
+
+    event_ending_time = models.TimeField(blank=True, null=True)
+
+    organizer = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return "{} - {} - {} - {}".format(self.event_type, self.venue.name, self.organizer, self.event_date)
+
+    class Meta:
+        db_table = 'booking'
