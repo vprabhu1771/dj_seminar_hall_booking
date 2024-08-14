@@ -9,6 +9,38 @@ Home
 
 {% block content %}
 
-Home
+<div class="d-flex align-items-end" style="padding-top: 80px;">
+
+    <div class="card">
+        {% if is_booked %}
+            <div class="alert alert-success">
+                Hall Booked
+            </div>
+        {% elif is_booked == False %}
+            <div class="alert alert-danger">
+                Hall Already Booked
+            </div>
+        {% endif %}
+
+        <!-- Error -->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for error in form.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="card-body">
+            <form action="" method="post" id="booking_form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-success" value="Book">
+            </form>
+        </div>
+    </div>
+
+</div>
+
 
 {% endblock %}
