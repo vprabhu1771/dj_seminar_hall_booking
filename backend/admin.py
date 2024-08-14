@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from django.utils.html import format_html
-from backend.models import CustomUser, Venue
+from backend.models import CustomUser, Venue, Booking
 
 from django.contrib.auth.admin import UserAdmin
 from backend.forms import CustomerUserCreationForm,CustomerUserChangeForm
@@ -45,3 +45,17 @@ class VenueAdmin(admin.ModelAdmin):
     image_tag.short_description = 'Image'
 
 admin.site.register(Venue, VenueAdmin)
+
+class BookingAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'event_type',
+        'venue',
+        'capacity',
+        'event_date',
+        'event_starting_time',
+        'event_ending_time',
+        'organizer'
+    )
+
+admin.site.register(Booking, BookingAdmin)
