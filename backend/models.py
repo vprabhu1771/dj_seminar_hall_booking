@@ -1,3 +1,5 @@
+from email.policy import default
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -47,3 +49,19 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+
+class Venue(models.Model):
+
+    id = models.BigAutoField(primary_key=True)
+
+    name = models.CharField(max_length=255)
+
+    capacity = models.PositiveIntegerField(default=0, blank=True, null=True)
+
+    image = models.ImageField(upload_to='venue', default='no-image-available.jpg', blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'venue'
